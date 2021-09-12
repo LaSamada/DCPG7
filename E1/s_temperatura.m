@@ -6,32 +6,32 @@ analog = out.STemp(:,5);
 
 grafico1 = tiledlayout(3,1);
 nexttile
-plot(tiempo,Step)
+plot(tiempo,YSL_PRO,'c')
 xlabel('Tiempo (s)')
 ylabel('Temperatura (C°)')
 hold on
-plot(tiempo,YSL_PRO)
-legend('Step','YSL PRO')
+plot(tiempo,Step,'k')
+legend('YSL PRO','Referencia')
 grid on
 hold off
 
 nexttile
-plot(tiempo,Step)
+plot(tiempo,FL_TF,'g')
 xlabel('Tiempo (s)')
 ylabel('Temperatura (C°)')
 hold on
-plot(tiempo,FL_TF)
-legend('Step','FL TF')
+plot(tiempo,Step,'k')
+legend('FL TF','Referencia')
 grid on
 hold off
 
 nexttile
-plot(tiempo,Step)
+plot(tiempo,analog,'m')
 xlabel('Tiempo (s)')
 ylabel('Temperatura (C°)')
 hold on
-plot(tiempo,analog)
-legend('Step','Analog Devices')
+plot(tiempo,Step,'k')
+legend('Analog Devices','Referencia')
 grid on
-hold off¿
+hold off
 

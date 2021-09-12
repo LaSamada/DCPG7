@@ -12,5 +12,5 @@ hold on
 plot(tiempo,aqua)
 plot(tiempo,realtech)
 plot(tiempo,proteus)
-legend('Sinusoidal','Aqua','Realtech','Proteus')
+legend('Referencia','Aqua','Realtech','Proteus')
 hold off

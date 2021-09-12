@@ -15,23 +15,25 @@ ylabel('Flujo (mL/min)')
 legend('Bomba LabV1')
 xlim([0 150])
 ylim([0 2])
-
-nexttile
-plot(rpm_IF3,f_IF3)
-grid on
-xlabel('RPM')
-ylabel('Flujo (mL/min)')
-legend('Bomba IF3')
-xlim([0 350])
-ylim([0 3500])
+title('Bombas peristálticas para flujo de vinazas')
 
 nexttile
 rpm_LabF1 = out.LabF1(:,1);
 f_LabF1 = out.LabF1(:,2);
-plot(rpm_LabF1,f_LabF1)
+plot(rpm_LabF1,f_LabF1,'r')
 grid on
 xlabel('RPM')
 ylabel('Flujo (mL/min)')
 legend('Bomba LabF1')
 xlim([0 150])
 ylim([0 2])
+
+nexttile
+plot(rpm_IF3,f_IF3,'g')
+grid on
+xlabel('RPM')
+ylabel('Flujo (mL/min)')
+legend('Bomba IF3')
+xlim([0 350])
+ylim([0 3500])
+title('Bomba peristáltica para flujo de refrigerante')
