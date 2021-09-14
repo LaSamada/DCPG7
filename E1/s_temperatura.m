@@ -8,7 +8,7 @@ grafico1 = tiledlayout(3,1);
 nexttile
 plot(tiempo,YSL_PRO,'c')
 xlabel('Tiempo (s)')
-ylabel('Temperatura (C°)')
+ylabel('Temperatura (°C)')
 ylim([35,40])
 xlim([4,6])
 hold on
@@ -20,7 +20,7 @@ hold off
 nexttile
 plot(tiempo,FL_TF,'g')
 xlabel('Tiempo (s)')
-ylabel('Temperatura (C°)')
+ylabel('Temperatura (°C)')
 hold on
 ylim([35,40])
 xlim([4,6])
@@ -32,7 +32,7 @@ hold off
 nexttile
 plot(tiempo,analog,'m')
 xlabel('Tiempo (s)')
-ylabel('Temperatura (C°)')
+ylabel('Temperatura (°C)')
 hold on
 ylim([35,40])
 xlim([4,6])
