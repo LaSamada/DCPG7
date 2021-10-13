@@ -24,7 +24,7 @@ sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
 str = []; 
 ts = [0 0];
-x0 = [100 100 100];     % Initial conditions
+x0 = [94.79 27 50];     % Initial conditions
 
 function sys = mdlDerivatives(~,x,u)
 % State variables
@@ -33,9 +33,10 @@ x2   =  x(2);                % Lactose,          [mol/L]
 x3   =  x(3);
 
 % Input variables
-u   = u(1);                % Tchaqueta,        [°C]
+Q   = u(1);                % Tchaqueta,        [°C]
 
 % Model parameters
+Vol = 4.5;
 alfa = 0.13;                % Volume,           [L]
 mu1   = 0.27;                % Area,             [m^2]
 ks1 = 24;                % Density,          [kg/L]
@@ -43,11 +44,12 @@ beta  = 1.9527;                % Cp,               [kJ/(kg*°C)]
 k2k1 = 3.5;                % Cpr,              [kJ/(kg*°C)]
 xi2 = 27;
 xi3 = 50;
+U = Q/Vol;
 
 %  Differential equations
-sys(1) = -beta * u * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                
-sys(2) = beta * u * (xi2 - x2) - ((mu1 * x2)/(ks1 + x2)) * x1;           
-sys(3) = beta * u * (xi3 - x3) + (k2k1) * ((mu1 * x2)/(ks1 + x2)) * x1;
+sys(1) = -beta * U * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                
+sys(2) = beta * U * (xi2 - x2) - ((mu1 * x2)/(ks1 + x2)) * x1;           
+sys(3) = beta * U * (xi3 - x3) + (k2k1) * ((mu1 * x2)/(ks1 + x2)) * x1;
 
 function sys = mdlOutputs(~,x,~)
 sys = [x(1) x(2) x(3)];                         
