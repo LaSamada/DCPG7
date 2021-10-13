@@ -14,40 +14,41 @@ end
 
 function [sys,x0,str,ts] = mdlInitializeSizes
 sizes=simsizes;
-sizes.NumContStates  = 3;        % (Biomass, Lactose, Tagatosa, T, H, pH) 
+sizes.NumContStates  = 4;        % (Biomass, Lactose, Tagatosa, T, H, pH) 
 sizes.NumDiscStates  = 0;  
-sizes.NumOutputs     = 3;        % (Biomass, Lactose, Tagatosa, T, H, pH) 
-sizes.NumInputs      = 1;        % (Tchaqueta, Fchaqueta, Fbase, COHb)
+sizes.NumOutputs     = 4;        % (Biomass, Lactose, Tagatosa, T, H, pH) 
+sizes.NumInputs      = 3;        % (Tchaqueta, Fchaqueta, Fbase, COHb)
 sizes.DirFeedthrough = 0; 
 sizes.NumSampleTimes = 1; 
 sys = simsizes(sizes);
 str = []; 
 ts = [0 0];
-x0 = [0 0 0];     % Initial conditions
+x0 = [100 100 100 100];     % Initial conditions
 
 function sys = mdlDerivatives(~,x,u)
 % State variables
-x1   =  x(1);                % Biomass,          [mol/L]
-x2   =  x(2);                % Lactose,          [mol/L]
-x3   =  x(3);
+x4   =  x(1);                % Biomass,          [mol/L]
+x5   =  x(2);                % Lactose,          [mol/L]
+x6   =  x(3);
+x7   =  x(4);
 
 % Input variables
 u   = u(1);                % Tchaqueta,        [°C]
+x2 = u(2);
+x3 = u(3);
 
 % Model parameters
-alfa = 0.13;                % Volume,           [L]
-mu1   = 0.27;                % Area,             [m^2]
-ks1 = 24;                % Density,          [kg/L]
-beta  = 1.9527;                % Cp,               [kJ/(kg*°C)]
-k2k1 = 3.5;                % Cpr,              [kJ/(kg*°C)]
-xi2 = x0(2);
-xi3 = x0(3);
+alfa2 = 0.38;                % Volume,           [L]
+mu12   = 0.5;                % Area,             [m^2]
+mu22 = 0.29;
+ks12 = 3.5;                % Density,          [kg/L]
+ks22  = 16;                % Cp,               [kJ/(kg*°C)]
 
 %  Differential equations
-sys(1) = -beta * u * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                
-sys(2) = beta * u * (xi2 - x2) - ((mu1 * x2)/(ks1 + x2)) * x1;           
-sys(3) = beta * u * (xi3 - x3) + (k2k1) * ((mu1 * x2)/(ks1 + x2)) * x1;
-sys(4) = 
+sys(1) = -u*alfa2*x4 + ((mu12*x6)/(ks12+x6))*x4;                
+sys(2) = -u*alfa2*x5 + ((mu22*x7)/(ks22+x7))*x5;         
+sys(3) = u*(x2-x6) - ((mu12*x6)/(ks12+x6))*x4;
+sys(4) = u*(x3-x7) - ((mu22*x7)/(ks22+x7+(x7/ks12)^2))*x5 + (k5/k3)*((mu12*x6)/(ks12+x6))*x4;
 
 function sys = mdlOutputs(~,x,~)
-sys = [x(1) x(2) x(3)];
+sys = [x(1) x(2) x(3) x(4)];
