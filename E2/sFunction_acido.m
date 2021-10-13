@@ -24,7 +24,7 @@ sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
 str = []; 
 ts = [0 0];
-x0 = [0 0 0];     % Initial conditions
+x0 = [100 100 100];     % Initial conditions
 
 function sys = mdlDerivatives(~,x,u)
 % State variables
@@ -41,8 +41,8 @@ mu1   = 0.27;                % Area,             [m^2]
 ks1 = 24;                % Density,          [kg/L]
 beta  = 1.9527;                % Cp,               [kJ/(kg*°C)]
 k2k1 = 3.5;                % Cpr,              [kJ/(kg*°C)]
-xi2 = x0(2);
-xi3 = x0(3);
+xi2 = 27;
+xi3 = 50;
 
 %  Differential equations
 sys(1) = -beta * u * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                
