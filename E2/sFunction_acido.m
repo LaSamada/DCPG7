@@ -17,9 +17,9 @@ function [sys,x0,str,ts] = mdlInitializeSizes
 sizes=simsizes;
 sizes.NumContStates  = 3;        % (Biomass, Lactose, Tagatosa, T, H, pH) 
 sizes.NumDiscStates  = 0;  
-sizes.NumOutputs     = 3;        % (Biomass, Lactose, Tagatosa, T, H, pH) 
+sizes.NumOutputs     = 4;        % (Biomass, Lactose, Tagatosa, T, H, pH) 
 sizes.NumInputs      = 1;        % (Tchaqueta, Fchaqueta, Fbase, COHb)
-sizes.DirFeedthrough = 0; 
+sizes.DirFeedthrough = 1; 
 sizes.NumSampleTimes = 1; 
 sys = simsizes(sizes);
 str = []; 
@@ -49,5 +49,6 @@ sys(1) = -beta * U * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;
 sys(2) = beta * U * (xi2 - x2) - ((mu1 * x2)/(ks1 + x2)) * x1;           
 sys(3) = beta * U * (xi3 - x3) + (k2k1) * ((mu1 * x2)/(ks1 + x2)) * x1;
 
-function sys = mdlOutputs(~,x,~)
-sys = [x(1) x(2) x(3)];                         
+function sys = mdlOutputs(~,x,u)
+
+sys = [u(1) x(1) x(2) x(3)];                         
