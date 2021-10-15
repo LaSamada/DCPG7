@@ -33,10 +33,9 @@ x2   =  x(2);                % Lactose,          [mol/L]
 x3   =  x(3);
 
 % Input variables
-Q   = u(1);                % Tchaqueta,        [°C]
+U   = u(1);                % Tchaqueta,        [°C]
 
 % Model parameters
-Vol = 4.5;
 alfa = 0.13;                % Volume,           [L]
 mu1   = 0.27;                % Area,             [m^2]
 ks1 = 24;                % Density,          [kg/L]
@@ -44,7 +43,6 @@ beta  = 1.9527;                % Cp,               [kJ/(kg*°C)]
 k2k1 = 3.5;                % Cpr,              [kJ/(kg*°C)]
 xi2 = 27;
 xi3 = 50;
-U = Q/Vol;
 
 %  Differential equations
 sys(1) = -beta * U * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                

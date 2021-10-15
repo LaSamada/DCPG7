@@ -33,19 +33,17 @@ x6   =  x(3);
 x7   =  x(4);
 
 % Input variables
-Q  = u(1);                % Tchaqueta,        [°C]
+U  = u(1);                % Tchaqueta,        [°C]
 x2 = u(2);
 x3 = u(3);
 
 % Model parameters
-Vol = 8.7;
 alfa2 = 0.38;                % Volume,           [L]
 mu12   = 0.5;                % Area,             [m^2]
 mu22 = 0.29;
 ks12 = 3.5;                % Density,          [kg/L]
 ks22  = 16;                % Cp,               [kJ/(kg*°C)]
 k5k3 = 0.9;
-U = Q/Vol;
 
 %  Differential equations
 sys(1) = -U*alfa2*x4 + ((mu12*x6)/(ks12+x6))*x4;                
