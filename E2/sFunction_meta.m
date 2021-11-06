@@ -50,16 +50,15 @@ ks12 = 3.5;                % Density,          [kg/L]
 ks22  = 16;                % Cp,               [kJ/(kg*°C)]
 k5k3 = 0.9;
 %Energia
-mu = ((mu1 * x2)/(ks1 + x2)) * (7e3 * exp(-(5300/(8.314 * ...
+mu = ((mu22 * x2)/(ks22 + x2)) * (7e3 * exp(-(5300/(8.314 * ...
     (Tr + 273))))) - (1e10 * exp(-5.15e4 / (8.314 * (Tr + 273)))); %?
-D = 0.164; %1/d
 Kt = 500 * 24 * 3600; %j/d m2 C
 At = 3 * 0.097 * 2 * pi * 0.097; %m2
 rhor = 1000; %kg/m3
 Cheatr = 4.186; %j/kgC
 Cheatj = 4.186; %j/kgC
 rhoj = 1000; %kg/m3
-Vj = 0.004; %m3
+Vj = 0.006; %m3
 V = 0.0087; %m3
 dHr = -74810 * 1000 / 16; %j/mol
 
@@ -68,7 +67,7 @@ sys(1) = -U*alfa2*x4 + ((mu12*x6)/(ks12+x6))*x4;
 sys(2) = -U*alfa2*x5 + ((mu22*x7)/(ks22+x7))*x5;         
 sys(3) = U *(x2-x6) - ((mu12*x6)/(ks12+x6))*x4;
 sys(4) = U *(x3-x7) - ((mu22*x7)/(ks22+x7+(x7/ks12)^2))*x5 + (k5k3)*((mu12*x6)/(ks12+x6))*x4;
-sys(5) = U * (Tin - Tr) + ((mu * x2 * dHr)/(32 * rhor * Cheatr)) - ...
+sys(5) = U * (Tin - Tr) + ((mu * x5 * dHr)/(32 * rhor * Cheatr)) - ...
     ((Kt * At * (Tr - Tj))/(V * rhor *Cheatr));               
 sys(6) = (Fj/Vj) * (Tjin - Tj) + ((Kt * At *...
     (Tr -Tj))/(Vj * rhoj * Cheatj));
