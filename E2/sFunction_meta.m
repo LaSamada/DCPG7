@@ -23,7 +23,7 @@ sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
 str = []; 
 ts = [0 0];
-x0 = [23.2 100 10 30 0 0];     % Initial conditions
+x0 = [23.2 100 10 30 35 25];     % Initial conditions
 
 function sys = mdlDerivatives(~,x,u)
 % State variables
@@ -50,8 +50,8 @@ ks12 = 3.5;                % Density,          [kg/L]
 ks22  = 16;                % Cp,               [kJ/(kg*°C)]
 k5k3 = 0.9;
 %Energia
-mu = ((mu22 * x2)/(ks22 + x2)) * (7e3 * exp(-(5300/(8.314 * ...
-    (Tr + 273))))) - (1e10 * exp(-5.15e4 / (8.314 * (Tr + 273)))); %?
+mu = ((mu22 * x2)/(ks22 + x2)) * ((7e3 * exp(-(5300/(8.314 * ...
+    (Tr + 273))))) - (1e10 * exp(-5.15e4 / (8.314 * (Tr + 273)))))/951.811; %?
 Kt = 500 * 24 * 3600; %j/d m2 C
 At = 3 * 0.097 * 2 * pi * 0.097; %m2
 rhor = 1000; %kg/m3

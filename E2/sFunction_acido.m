@@ -1,4 +1,3 @@
-
 function [sys, x0,str,ts] = sFunction_acido(t,x,u,flag)
 switch flag
    case 0
@@ -24,7 +23,7 @@ sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
 str = []; 
 ts = [0 0];
-x0 = [94.79 27 50 0 0];     % Initial conditions
+x0 = [94.79 27 50 25 25];     % Initial conditions
 
 function sys = mdlDerivatives(~,x,u)
 % State variables
@@ -48,8 +47,7 @@ k2k1 = 3.5;                % Cpr,              [kJ/(kg*°C)]
 xi2 = 27;
 xi3 = 50;
 %Energia
-mu = ((mu1 * x2)/(ks1 + x2)) * (0.3e4 * exp(-(5800/(8.314 * ...
-    (Tr + 273))))) - (0.7e10 * exp(-4.9e4 / (8.314 * (Tr + 273)))); %?
+mu = ((mu1 * x2)/(ks1 + x2)) * (((0.3e4 * exp(-(5800/(8.314 * (Tr + 273))))) - (0.7e10 * exp(-4.9e4 / (8.314 * (Tr + 273)))))/277.344); %?
 Kt = 500 * 24 * 3600; %j/d m2 C
 At = 3 * 0.078 * 2 * pi * 0.078; %m2
 rhor = 1000; %kg/m3
@@ -59,16 +57,14 @@ rhoj = 1000; %kg/m3
 Vj = 0.004; %m3
 V = 0.0045; %m3
 Tin = 25;
-dHr = -443920 * 1000 / 88; %j/mol
+dHr = -443920 * 1000 / 88; %j/kg
 
 %  Differential equations
 sys(1) = -beta * U * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                
 sys(2) = beta * U * (xi2 - x2) - ((mu1 * x2)/(ks1 + x2)) * x1;           
 sys(3) = beta * U * (xi3 - x3) + (k2k1) * ((mu1 * x2)/(ks1 + x2)) * x1;
-sys(4) = beta * U (Tin - Tr) + ((mu * x1 * dHr)/(32 * rhor * Cheatr)) - ...
-    ((Kt * At * (Tr - Tj))/(V * rhor *Cheatr));               
-sys(5) = (Fj/Vj) * (Tjin - Tj) + ((Kt * At *...
-    (Tr -Tj))/(Vj * rhoj * Cheatj));
+sys(4) = beta * U * (Tin - Tr) + ((mu * x1 * dHr)/(32 * rhor * Cheatr)) - ((Kt * At * (Tr - Tj))/(V * rhor *Cheatr));               
+sys(5) = (Fj/Vj) * (Tjin - Tj) + ((Kt * At * (Tr -Tj))/(Vj * rhoj * Cheatj));
 
 function sys = mdlOutputs(~,x,u)
 
