@@ -23,7 +23,7 @@ sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
 str = []; 
 ts = [0 0];
-x0 = [23.2 100 10 30];     % Initial conditions
+x0 = [23.2 100 10 30 0 0];     % Initial conditions
 
 function sys = mdlDerivatives(~,x,u)
 % State variables
@@ -54,21 +54,21 @@ mu = ((mu1 * x2)/(ks1 + x2)) * (7e3 * exp(-(5300/(8.314 * ...
     (Tr + 273))))) - (1e10 * exp(-5.15e4 / (8.314 * (Tr + 273)))); %?
 D = 0.164; %1/d
 Kt = 500 * 24 * 3600; %j/d m2 C
-At = 3 * 0.078 * 2 * pi * 0.078; %m2
+At = 3 * 0.097 * 2 * pi * 0.097; %m2
 rhor = 1000; %kg/m3
 Cheatr = 4.186; %j/kgC
 Cheatj = 4.186; %j/kgC
 rhoj = 1000; %kg/m3
 Vj = 0.004; %m3
-V = 0.008; %m3
-dHr = -443920 * 1000 / 88; %j/mol
+V = 0.0087; %m3
+dHr = -74810 * 1000 / 16; %j/mol
 
 %  Differential equations
 sys(1) = -U*alfa2*x4 + ((mu12*x6)/(ks12+x6))*x4;                
 sys(2) = -U*alfa2*x5 + ((mu22*x7)/(ks22+x7))*x5;         
-sys(3) = U*(x2-x6) - ((mu12*x6)/(ks12+x6))*x4;
-sys(4) = U*(x3-x7) - ((mu22*x7)/(ks22+x7+(x7/ks12)^2))*x5 + (k5k3)*((mu12*x6)/(ks12+x6))*x4;
-sys(5) = D * (Tin - Tr) + ((mu * x2 * dHr)/(32 * rhor * Cheatr)) - ...
+sys(3) = U *(x2-x6) - ((mu12*x6)/(ks12+x6))*x4;
+sys(4) = U *(x3-x7) - ((mu22*x7)/(ks22+x7+(x7/ks12)^2))*x5 + (k5k3)*((mu12*x6)/(ks12+x6))*x4;
+sys(5) = U * (Tin - Tr) + ((mu * x2 * dHr)/(32 * rhor * Cheatr)) - ...
     ((Kt * At * (Tr - Tj))/(V * rhor *Cheatr));               
 sys(6) = (Fj/Vj) * (Tjin - Tj) + ((Kt * At *...
     (Tr -Tj))/(Vj * rhoj * Cheatj));

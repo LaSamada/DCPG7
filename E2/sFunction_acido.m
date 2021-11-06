@@ -50,7 +50,6 @@ xi3 = 50;
 %Energia
 mu = ((mu1 * x2)/(ks1 + x2)) * (0.3e4 * exp(-(5800/(8.314 * ...
     (Tr + 273))))) - (0.7e10 * exp(-4.9e4 / (8.314 * (Tr + 273)))); %?
-D = 0.164; %1/d
 Kt = 500 * 24 * 3600; %j/d m2 C
 At = 3 * 0.078 * 2 * pi * 0.078; %m2
 rhor = 1000; %kg/m3
@@ -66,7 +65,7 @@ dHr = -443920 * 1000 / 88; %j/mol
 sys(1) = -beta * U * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                
 sys(2) = beta * U * (xi2 - x2) - ((mu1 * x2)/(ks1 + x2)) * x1;           
 sys(3) = beta * U * (xi3 - x3) + (k2k1) * ((mu1 * x2)/(ks1 + x2)) * x1;
-sys(4) = D * (Tin - Tr) + ((mu * x1 * dHr)/(32 * rhor * Cheatr)) - ...
+sys(4) = beta * U (Tin - Tr) + ((mu * x1 * dHr)/(32 * rhor * Cheatr)) - ...
     ((Kt * At * (Tr - Tj))/(V * rhor *Cheatr));               
 sys(5) = (Fj/Vj) * (Tjin - Tj) + ((Kt * At *...
     (Tr -Tj))/(Vj * rhoj * Cheatj));
