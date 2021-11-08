@@ -57,13 +57,13 @@ rhoj = 1000; %kg/m3
 Vj = 0.004; %m3
 V = 0.0045; %m3
 Tin = 25;
-dHr = -443920 * 1000 / 88; %j/kg
+dHr = -44392 * 1000 / 88; %j/kg
 
 %  Differential equations
-sys(1) = -beta * U * alfa * x1 + ((mu1 * x2)/(ks1 + x2)) * x1;                
-sys(2) = beta * U * (xi2 - x2) - ((mu1 * x2)/(ks1 + x2)) * x1;           
-sys(3) = beta * U * (xi3 - x3) + (k2k1) * ((mu1 * x2)/(ks1 + x2)) * x1;
-sys(4) = beta * U * (Tin - Tr) + ((mu * x1 * dHr)/(32 * rhor * Cheatr)) - ((Kt * At * (Tr - Tj))/(V * rhor *Cheatr));               
+sys(1) = -beta * U * alfa * x1 + mu * x1;                
+sys(2) = beta * U * (xi2 - x2) - mu * x1;           
+sys(3) = beta * U * (xi3 - x3) + (k2k1) * mu * x1;
+sys(4) = beta * U * (Tin - Tr) - ((mu * x1 * dHr)/(32 * rhor * Cheatr)) - ((Kt * At * (Tr - Tj))/(V * rhor *Cheatr));               
 sys(5) = (Fj/Vj) * (Tjin - Tj) + ((Kt * At * (Tr -Tj))/(Vj * rhoj * Cheatj));
 
 function sys = mdlOutputs(~,x,u)
