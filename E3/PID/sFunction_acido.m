@@ -56,7 +56,7 @@ Cheatj = 4.186; %j/kgC
 rhoj = 1000; %kg/m3
 Vj = 0.004; %m3
 V = 0.0045; %m3
-Tin = 25;
+Tin = 30;
 dHr = -44392 * 1000 / 88; %j/kg
 
 %  Differential equations
